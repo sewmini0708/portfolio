@@ -101,3 +101,10 @@ function typeEffect() {
 }
 
 if (typingText) typeEffect();
+ // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+});

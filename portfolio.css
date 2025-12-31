@@ -391,3 +391,47 @@ body.dark-theme .pricing-card {
     color: var(--primary-blue); background-color: var(--white);
     transform: translateY(-5px);
 }
+/* Mobile Responsive Styles */
+.menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+.menu-btn {
+    display: block;
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff; /* Adjust this color to match your theme */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+.nav-links.active {
+    display: flex;
+            }
+
+.nav-links li {
+    margin: 1rem 0;
+    text-align: center;
+            }
+
+.hero-content, .about-container {
+    flex-direction: column;
+    text-align: center;
+            }
+
+.skills-grid, .projects-grid, .pricing-grid {
+        grid-template-columns: 1fr !important;
+            }
+}
