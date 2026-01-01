@@ -281,6 +281,17 @@ if (shareBtn) {
     });
 }
 
+// Contact Email Click Logic (Copy to Clipboard)
+const contactEmail = document.getElementById('contactEmail');
+if (contactEmail) {
+    contactEmail.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(contactEmail.innerText).then(() => {
+            alert('Email address copied to clipboard!');
+        });
+    });
+}
+
 // Lightbox Logic
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
