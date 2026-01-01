@@ -33,6 +33,12 @@
             <p>I am a <span class="typing-text"></span></p>
             <a href="#contact" class="btn">Contact Me</a>
             <a href="cv.pdf" class="btn btn-outline" download>Download CV</a>
+            <div class="social-actions">
+                <button id="likeBtn" class="action-btn like"><i class="far fa-heart"></i> <span class="btn-text">Like</span> <span class="like-count">25</span></button>
+                <a href="https://www.linkedin.com/in/ruwanthika-sewmini-41b653364" target="_blank" class="action-btn follow"><i class="fas fa-plus"></i> Follow</a>
+                <a href="https://www.youtube.com/@dreams2964" target="_blank" class="action-btn subscribe"><i class="fab fa-youtube"></i> Subscribe</a>
+                <button id="shareBtn" class="action-btn share"><i class="fas fa-share-alt"></i> Share</button>
+            </div>
         </div>
     </header>
 
@@ -47,41 +53,250 @@
     <section id="skills" class="section bg-darker">
         <h2 class="section-title">Skills</h2>
         <div class="skills-grid">
-            <div class="skill-card"><h3>AutoCAD</h3><p>2D & 3D Engineering Drawings</p></div>
-            <div class="skill-card"><h3>Critical Thinking</h3><p>Complex Problem Solving</p></div>
-            <div class="skill-card"><h3>Leadership</h3><p>Team management & Initiative</p></div>
-            <div class="skill-card"><h3>Biomedical Tech</h3><p>Theoretical & Practical expertise</p></div>
+            <div class="skill-card"><h3>AutoCAD Drafting</h3><p>2D Architectural & Mechanical Plans</p></div>
+            <div class="skill-card"><h3>3D Modeling</h3><p>Fusion 360 & Product Design</p></div>
+            <div class="skill-card"><h3>Biomedical Tech</h3><p>Prosthetics & Medical Devices</p></div>
+            <div class="skill-card"><h3>Architectural Design</h3><p>Floor Plans, Elevations & Site Layouts</p></div>
+            <div class="skill-card"><h3>Structural Detailing</h3><p>Foundation & Bracing Systems</p></div>
+            <div class="skill-card"><h3>MEP Layouts</h3><p>Electrical & Plumbing Diagrams</p></div>
+            <div class="skill-card"><h3>3D Visualization</h3><p>Photorealistic Rendering</p></div>
+            <div class="skill-card"><h3>Technical Drawing</h3><p>Engineering Standards & Documentation</p></div>
         </div>
     </section>
      <section id="projects" class="section">
             <h2 class="section-title">My Projects</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="2d">Biomedical 2D</button>
+                <button class="filter-btn" data-filter="3d">Biomedical 3D</button>
+                <button class="filter-btn" data-filter="house2d">Architectural 2D</button>
+                <button class="filter-btn" data-filter="house3d">Architectural 3D</button>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <!-- Project 1: 2D Design -->
+                <div class="project-card" data-category="2d">
                     <div class="project-img-container">
-                        <img src="2dpic.jpg" alt="Web Design">
+                        <img src="2dpic.jpg" alt="Prosthetic Design">
                         <div class="overlay">
                             <a href="2dpic.jpg" class="view-btn">View Project</a>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>2D Design</h3>
-                        <p>Creative prosthetic design and modern layouts.</p>
+                        <h3>Prosthetic Leg Design</h3>
+                        <p>Detailed 2D engineering drawing for biomedical application.</p>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <!-- Project 2: 3D Design -->
+                <div class="project-card" data-category="3d">
                     <div class="project-img-container">
-                        <img src="3dpic.jpg" alt="Development">
+                        <img src="3dpic.jpg" alt="Robotic Leg">
                         <div class="overlay">
                             <a href="3dpic.jpg" class="view-btn">View Project</a>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>3D Design</h3>
-                        <p>Responsive websites using Solid worker, Fusion 360,AutoCAD.</p>
+                        <h3>Robotic Leg Model</h3>
+                        <p>High-fidelity 3D rendering using Fusion 360.</p>
                     </div>
                 </div>
 
+                <!-- Project 3: House Plan 2D -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="site plan.png" alt="House Site Plan">
+                        <div class="overlay">
+                            <a href="site plan.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Residential Site Plan</h3>
+                        <p>Architectural site layout showing boundaries and placement.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4: House Plan 3D -->
+                <div class="project-card" data-category="house3d">
+                    <div class="project-img-container">
+                        <img src="house 2.jpg" alt="3D House Render">
+                        <div class="overlay">
+                            <a href="house 2.jpg" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Modern Home Exterior</h3>
+                        <p>Photorealistic 3D visualization of a residential project.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5: House 1 -->
+                <div class="project-card" data-category="house3d">
+                    <div class="project-img-container">
+                        <img src="house 1.png" alt="House Design Concept">
+                        <div class="overlay">
+                            <a href="house 1.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Architectural Concept</h3>
+                        <p>Design concept visualization for a modern home.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6: Medical 3D -->
+                <div class="project-card" data-category="3d">
+                    <div class="project-img-container">
+                        <img src="3dpic3.jpeg" alt="Medical Device">
+                        <div class="overlay">
+                            <a href="3dpic3.jpeg" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Medical Device Prototype</h3>
+                        <p>3D modeling for a new biomedical instrument concept.</p>
+                    </div>
+                </div>
+
+                <!-- Project 7: Medical 3D -->
+                <div class="project-card" data-category="3d">
+                    <div class="project-img-container">
+                        <img src="3dpic2.jpg" alt="Prosthetic Component">
+                        <div class="overlay">
+                            <a href="3dpic2.jpg" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Prosthetic Component</h3>
+                        <p>Detailed mechanical design of a prosthetic joint.</p>
+                    </div>
+                </div>
+
+                 <!-- Project 8: Birdseye View -->
+                <div class="project-card" data-category="house3d">
+                    <div class="project-img-container">
+                        <img src="birdseye view.png" alt="Aerial View">
+                        <div class="overlay">
+                            <a href="birdseye view.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Aerial Property View</h3>
+                        <p>Bird's-eye perspective render of the housing project.</p>
+                    </div>
+                </div>
+
+                <!-- Project 9: Bracing Plan -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="bracing plan.png" alt="Bracing Plan">
+                        <div class="overlay">
+                            <a href="bracing plan.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Structural Bracing Plan</h3>
+                        <p>Technical drawing detailing structural support systems.</p>
+                    </div>
+                </div>
+
+                
+                <!-- Project 10: Electrical Plan -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="electrical plan.png" alt="Electrical Plan">
+                        <div class="overlay">
+                            <a href="electrical plan.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Electrical Layout</h3>
+                        <p>Comprehensive electrical wiring and fixture plan.</p>
+                    </div>
+                </div>
+
+                <!-- Project 11: Elevation 1 -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="elevation 1.png" alt="Front Elevation">
+                        <div class="overlay">
+                            <a href="elevation 1.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Front Elevation</h3>
+                        <p>2D architectural drawing of the building's front facade.</p>
+                    </div>
+                </div>
+
+                <!-- Project 12: Elevation 2 -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="elevation 2.png" alt="Side Elevation">
+                        <div class="overlay">
+                            <a href="elevation 2.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Side Elevation</h3>
+                        <p>2D architectural drawing of the building's side profile.</p>
+                    </div>
+                </div>
+
+                <!-- Project 13: Floor Plan -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="floor plan.png" alt="Floor Plan">
+                        <div class="overlay">
+                            <a href="floor plan.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Detailed Floor Plan</h3>
+                        <p>Complete layout of rooms, dimensions, and spatial flow.</p>
+                    </div>
+                </div>
+
+                <!-- Project 14: Foundation Plan -->
+                <div class="project-card" data-category="house2d">
+                    <div class="project-img-container">
+                        <img src="foundation plan.png" alt="Foundation Plan">
+                        <div class="overlay">
+                            <a href="foundation plan.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Foundation Layout</h3>
+                        <p>Structural engineering plan for the building foundation.</p>
+                    </div>
+                </div>
+
+                <!-- Project 15: View -->
+                <div class="project-card" data-category="house3d">
+                    <div class="project-img-container">
+                        <img src="view.png" alt="Exterior View">
+                        <div class="overlay">
+                            <a href="view.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Exterior Perspective</h3>
+                        <p>3D visualization of the house from the street view.</p>
+                    </div>
+                </div>
+
+                <!-- Project 16: North View -->
+                <div class="project-card" data-category="house3d">
+                    <div class="project-img-container">
+                        <img src="north view.png" alt="North View">
+                        <div class="overlay">
+                            <a href="north view.png" class="view-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>North Elevation Render</h3>
+                        <p>3D realistic rendering of the north-facing exterior.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -113,7 +328,7 @@
                 <li>Unlimited Revisions</li>
                 <li>PDF & DWG Formats</li>
             </ul>
-            <a href="#contact" class="btn btn-outline">Get Started</a>
+            <a href="#" class="btn btn-outline payment-btn" data-plan="2D Draughting" data-price="$25">Get Started</a>
         </div>
 
         <div class="pricing-card featured">
@@ -126,7 +341,7 @@
                 <li>High-Res Rendering</li>
                 <li>Source Files Included</li>
             </ul>
-            <a href="#contact" class="btn">Get Started</a>
+            <a href="#" class="btn payment-btn" data-plan="3D Modeling" data-price="$60">Get Started</a>
         </div>
 
         <div class="pricing-card">
@@ -138,7 +353,7 @@
                 <li>Documentation Review</li>
                 <li>Project Management</li>
             </ul>
-            <a href="#contact" class="btn btn-outline">Get Started</a>
+            <a href="#" class="btn btn-outline payment-btn" data-plan="Tech Consulting" data-price="$40">Get Started</a>
         </div>
     </div>
 </section>
@@ -151,7 +366,7 @@
             <p>📍<a href="https://maps.app.goo.gl/VHgvaDSVYfsGQJ2t7?g_st=aw"> Kandy, Sri Lanka </a></p>
         </div>
 
-        <form id="contactForm" class="contact-form" action="https://formspree.io/f/YOUR_NEW_FORM_ID" method="POST">
+        <form id="contactForm" class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
             <div class="form-group">
                 <input type="text" id="name" name="name" placeholder="Your Name" required>
                 <small class="error-message"></small>
@@ -170,14 +385,52 @@
         <div class="social-links">
             <a href="https://www.instagram.com/_ruwanthikasewmini_?igsh=MWpkY3RiejcydGdkaw==&amp;utm_source=ig_contact_invite" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/176Pgrubys/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.linkedin.com/in/Ruwanthikasewmini" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.linkedin.com/in/ruwanthika-sewmini-41b653364" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/sewmini0708" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.youtube.com/@dreams2964" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/94714059427" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
 
         <p class="copyright">&copy; 2025 Sewmini Ruwanthika. All Rights Reserved.</p>
     </footer>
 
     <button id="scrollTopBtn" title="Go to top">↑</button>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Secure Checkout</h2>
+            <div id="selectedPlanInfo"></div>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label>Name on Card</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" required placeholder="0000 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry</label>
+                        <input type="text" required placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVC</label>
+                        <input type="text" required placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Pay Now</button>
+            </form>
+        </div>
+    </div>
 
     <script src="portfolio.js"></script>
 </body>

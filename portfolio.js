@@ -1,28 +1,45 @@
+// Ensure page starts at the top on load
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
 // Check local storage for theme preference on load
-if (localStorage.getItem('theme') === 'dark') {
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
     body.classList.add('dark-theme');
     themeToggle.textContent = '☀️';
 }
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    
-    if (body.classList.contains('dark-theme')) {
-        localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = '☀️';
-    } else {
-        localStorage.setItem('theme', 'light');
-        themeToggle.textContent = '🌙';
-    }
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        
+        if (body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+    });
+}
 
 // Scroll to Top Button Logic
 const scrollTopBtn = document.getElementById("scrollTopBtn");
+const navbar = document.querySelector('.navbar');
 
 window.onscroll = function() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        navbar.classList.add("sticky");
+    } else {
+        navbar.classList.remove("sticky");
+    }
+
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         scrollTopBtn.style.display = "block";
     } else {
@@ -64,8 +81,23 @@ if (contactForm) {
         if (message.value.trim() === '') showError(message, 'Message is required');
 
         if (isValid) {
-            alert('Thank you! Your message has been sent.');
-            contactForm.reset();
+            const formData = new FormData(contactForm);
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent.');
+                    contactForm.reset();
+                } else {
+                    alert('Oops! There was a problem submitting your form.');
+                }
+            }).catch(error => {
+                alert('Oops! There was a problem submitting your form.');
+            });
         }
     });
 }
@@ -108,3 +140,169 @@ if (typingText) typeEffect();
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
 });
+
+// Project Filtering Logic
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Like Button Logic
+const likeBtn = document.getElementById('likeBtn');
+if (likeBtn) {
+    const likeIcon = likeBtn.querySelector('i');
+    const likeText = likeBtn.querySelector('.btn-text');
+    const likeCount = likeBtn.querySelector('.like-count');
+    let count = 25; // Base count
+
+// Check if previously liked
+    const isLiked = localStorage.getItem('portfolioLiked') === 'true';
+    
+if (isLiked) {
+        likeBtn.classList.add('liked');
+        likeIcon.className = 'fas fa-heart';
+        likeText.textContent = 'Liked';
+        likeCount.textContent = count + 1;
+    }
+
+    likeBtn.addEventListener('click', () => {
+if (likeBtn.classList.contains('liked')) {
+            likeBtn.classList.remove('liked');
+            likeIcon.className = 'far fa-heart';
+            likeText.textContent = 'Like';
+            likeCount.textContent = count;
+            localStorage.setItem('portfolioLiked', 'false');
+    } else {
+            likeBtn.classList.add('liked');
+            likeIcon.className = 'fas fa-heart';
+            likeText.textContent = 'Liked';
+            likeCount.textContent = count + 1;
+            localStorage.setItem('portfolioLiked', 'true');
+
+            // Send email notification using the contact form's action URL
+if (contactForm && contactForm.action) {
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: "New Portfolio Like!",
+                        message: "Someone just clicked the Like button on your portfolio."
+                    })
+                }).catch(err => console.error("Error sending like notification:", err));
+            }
+        }
+    });
+}
+
+// Payment Modal Logic
+const paymentModal = document.getElementById('paymentModal');
+const paymentBtns = document.querySelectorAll('.payment-btn');
+const closePaymentBtn = document.querySelector('.close-modal');
+const paymentForm = document.getElementById('paymentForm');
+const planInfo = document.getElementById('selectedPlanInfo');
+
+if (paymentModal) {
+    paymentBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const planName = btn.getAttribute('data-plan');
+            const planPrice = btn.getAttribute('data-price');
+            planInfo.innerHTML = `<strong>Selected Plan:</strong> ${planName} <br> <strong>Total:</strong> ${planPrice}`;
+            paymentModal.style.display = 'block';
+        });
+    });
+
+    closePaymentBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === paymentModal) {
+            paymentModal.style.display = 'none';
+        }
+    });
+
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = paymentForm.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = 'Processing...';
+        
+        setTimeout(() => {
+            alert('Payment Successful! (Demo Mode)');
+            paymentModal.style.display = 'none';
+            paymentForm.reset();
+            btn.innerText = originalText;
+        }, 1500);
+    });
+}
+
+// Share Button Logic
+const shareBtn = document.getElementById('shareBtn');
+if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+        // Try to use the native share API (Mobile/Modern Browsers)
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Sewmini Ruwanthika | Portfolio',
+                    text: 'Check out this amazing portfolio!',
+                    url: window.location.href
+                });
+            } catch (err) {
+                console.log('Share canceled or failed', err);
+            }
+        } else {
+            // Fallback to copying link to clipboard
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const originalHTML = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    shareBtn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+    });
+}
+
+// Lightbox Logic
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-lightbox');
+const viewButtons = document.querySelectorAll('.view-btn');
+
+if (lightbox) {
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            lightbox.style.display = "block";
+            lightboxImg.src = btn.getAttribute('href');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.style.display = "none";
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    });
+}
