@@ -3,6 +3,35 @@ if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
 }
 
+// 1. EmailJS මුලින්ම සක්‍රීය (Initialize) කරන්න
+(function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("fRjtXvJUGYvJlmR-R"); // ඔබේ Public Key එක මෙතැනට ඇතුළත් කළා
+    }
+})();
+
+// 2. බොත්තම් ක්ලික් කළ විට ක්‍රියාත්මක වන ප්‍රධාන Function එක
+function sendNotification(actionType) {
+    if (typeof emailjs === 'undefined') return;
+    
+    const serviceID = "service_vu2pskk"; 
+    const templateID = "template_aj4mx1y"; 
+
+    // Template එකේ ඇති {{name}}, {{title}}, {{message}} යන කොටස් වලට දත්ත යැවීම
+    const templateParams = {
+        name: "Sewmini's Portfolio Visitor",
+        title: actionType,
+        message: `Someone just clicked the ${actionType} button on your portfolio!`
+    };
+
+    emailjs.send(serviceID, templateID, templateParams)
+        .then(() => {
+            console.log("Success! Sewmini will receive your " + actionType + " notification.");
+        }, (error) => {
+            console.log("Failed...", error);
+        });
+}
+
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
@@ -196,16 +225,7 @@ if (likeBtn.classList.contains('liked')) {
             localStorage.setItem('portfolioLiked', 'true');
 
             // Send email notification using the contact form's action URL
-if (contactForm && contactForm.action) {
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        _subject: "New Portfolio Like!",
-                        message: "Someone just clicked the Like button on your portfolio."
-                    })
-                }).catch(err => console.error("Error sending like notification:", err));
-            }
+            sendNotification("Liked");
         }
     });
 }
@@ -257,6 +277,7 @@ if (paymentModal) {
 const shareBtn = document.getElementById('shareBtn');
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
+        sendNotification("Shared");
         // Try to use the native share API (Mobile/Modern Browsers)
         if (navigator.share) {
             try {
@@ -279,6 +300,17 @@ if (shareBtn) {
             });
         }
     });
+}
+
+// Follow & Subscribe Button Logic
+const followBtn = document.querySelector('.action-btn.follow');
+if (followBtn) {
+    followBtn.addEventListener('click', () => sendNotification("Followed"));
+}
+
+const subscribeBtn = document.querySelector('.action-btn.subscribe');
+if (subscribeBtn) {
+    subscribeBtn.addEventListener('click', () => sendNotification("Subscribed"));
 }
 
 // Contact Email Click Logic (Copy to Clipboard)
