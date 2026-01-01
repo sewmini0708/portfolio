@@ -337,7 +337,7 @@ body.dark-theme .pricing-card {
     margin: 0 5px;
     border: 2px solid var(--accent-color);
     background: transparent;
-    color: var(--text-color);
+    color: var(--accent-color);
     cursor: pointer;
     border-radius: 20px;
     font-weight: bold;
@@ -375,10 +375,7 @@ body.dark-theme .pricing-card {
     text-align: center;
     background-color: var(--dark-blue);
     color: #ffffff;
-}
-
-body.dark-theme .project-info {
-    background-color: rgba(255, 255, 255, 0.05);
+    border-top: 3px solid var(--accent-color);
 }
 
 .view-btn {
