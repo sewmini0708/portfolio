@@ -3,21 +3,21 @@ if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
 }
 
-// 1. EmailJS මුලින්ම සක්‍රීය (Initialize) කරන්න
+// 1. EmailJS 1stly on (Initialize) 
 (function() {
     if (typeof emailjs !== 'undefined') {
-        emailjs.init("fRjtXvJUGYvJlmR-R"); // ඔබේ Public Key එක මෙතැනට ඇතුළත් කළා
+        emailjs.init("fRjtXvJUGYvJlmR-R"); // this is my publick key
     }
 })();
 
-// 2. බොත්තම් ක්ලික් කළ විට ක්‍රියාත්මක වන ප්‍රධාන Function එක
+// 2.when click the button what work as main function 
 function sendNotification(actionType) {
     if (typeof emailjs === 'undefined') return;
     
     const serviceID = "service_vu2pskk"; 
     const templateID = "template_aj4mx1y"; 
 
-    // Template එකේ ඇති {{name}}, {{title}}, {{message}} යන කොටස් වලට දත්ත යැවීම
+    // In the Template  {{name}}, {{title}}, {{message}} send data 
     const templateParams = {
         name: "Sewmini's Portfolio Visitor",
         title: actionType,
@@ -224,7 +224,7 @@ if (likeBtn.classList.contains('liked')) {
             likeCount.textContent = count + 1;
             localStorage.setItem('portfolioLiked', 'true');
 
-            // Send email notification using the contact form's action URL
+// Send email notification using the contact form's action URL
             sendNotification("Liked");
         }
     });
